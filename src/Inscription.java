@@ -18,9 +18,27 @@ public class Inscription extends Application {
     private Group root;
     private GridPane gridPane;
     private Connexion connexion;
+    private String login, motDePasse;
+
+    public Inscription(String pLogin, String pMotDePasse){
+        login = pLogin;
+        motDePasse = pMotDePasse;
+    }
+
+    public String getLogin() { return login; }
+
+    public String getMotDePasse() { return motDePasse; }
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
+        Inscription utilisateur = new Inscription();
+
+
+
         primaryStage.setTitle("Formulaire d'inscription");
 
         root = new Group();
@@ -166,7 +184,6 @@ public class Inscription extends Application {
             @Override
             public void handle(ActionEvent event) {
 
-
                 if(champNom.getText().isEmpty()) {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Erreur !", "Saisissez votre nom");
                     return;
@@ -179,8 +196,10 @@ public class Inscription extends Application {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Saisissez votre mot de passe");
                     return;
                 }
+                connexion();
 
                 showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Inscription réussi", "Bienvenue " + champNom.getText());
+
             }
         });
     }
@@ -192,7 +211,7 @@ public class Inscription extends Application {
         alert.setContentText(message);
         alert.initOwner(owner);
         alert.show();
-    }
+}
 
     public static void main(String[] args) {
         launch(args);

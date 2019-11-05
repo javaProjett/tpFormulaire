@@ -14,7 +14,7 @@ import javafx.stage.Window;
 
 import java.util.prefs.Preferences;
 
-public class Connexion {
+public class Connexion{
 
     private Inscription inscription;
     private Group root;
@@ -131,6 +131,11 @@ public class Connexion {
                 showAlert(Alert.AlertType.CONFIRMATION, gridPane.getScene().getWindow(), "Inscription réussi", "Bienvenue " + champLogin.getText());
             }
         });
+    }
+    //Méthode pour effacer les champs login et mot de passe
+    public void clear() {
+        champLogin.setText("");
+        champMotDePasse.setText("");
     }
 
     private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
