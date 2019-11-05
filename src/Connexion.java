@@ -12,16 +12,33 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Window;
 
+import java.util.prefs.Preferences;
+
 public class Connexion {
 
     private Inscription inscription;
     private Group root;
+
+    private TextField champLogin;
+    private PasswordField champMotDePasse;
+
+    Preferences preferences;
 
     public Connexion(Inscription inscription, Group root) {
         this.inscription = inscription;
         this.root = root;
     }
 
+    // Méthode pour confirmer le login, en statique, pour tester avec mon prénom et un mot de passe à 4 chiffres
+    private void login(ActionEvent event){
+        if(champLogin.getText().equals("mehdi") && champMotDePasse.getText().equals("1234")) {
+            preferences.put("login", champLogin.getText());
+            preferences.put("mot de passe", champMotDePasse.getText());
+        }
+        else {
+            System.out.println("Mot de passe invalide");
+        }
+    }
     private GridPane creationVoletFormulaireConnexion() {
 
         GridPane gridPane = new GridPane();  // On instancie un nouveau volet de grille

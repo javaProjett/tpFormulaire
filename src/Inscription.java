@@ -18,6 +18,7 @@ public class Inscription extends Application {
     private Group root;
     private GridPane gridPane;
     private Connexion connexion;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Formulaire d'inscription");
@@ -164,6 +165,8 @@ public class Inscription extends Application {
         buttonValider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+
                 if(champNom.getText().isEmpty()) {
                     showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Erreur !", "Saisissez votre nom");
                     return;
