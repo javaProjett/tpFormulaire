@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -14,19 +15,30 @@ import javafx.stage.Window;
 
 public class Inscription extends Application {
 
+    private Group root;
+    private GridPane gridPane;
+    private Connexion connexion;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Formulaire d'inscription");
 
-        GridPane gridPane = creationVoletFormulaireInscription(); // Créer le volet de formulaire d'inscription
+        root = new Group();
+        gridPane = creationVoletFormulaireInscription(); // Créer le volet de formulaire d'inscription
 
+        connexion = new Connexion(this, root);
         addUIControls(gridPane); //  Ajouter des contrôles d'interface utilisateur au volet Grille du formulaire d'inscription
 
-        Scene scene = new Scene(gridPane, 800, 500); // Créer une scène avec un volet de grille de formulaire d'inscription en tant que noeud racine
+        Scene scene = new Scene(root, 800, 650); // Créer une scène avec un volet de grille de formulaire d'inscription en tant que noeud racine
 
+        afficheInscription();
         primaryStage.setScene(scene); // Met en place la scene
 
         primaryStage.show(); // On affiche
+    }
+
+    private void afficheInscription() {
+        root.getChildren().clear();
+        root.getChildren().add(gridPane);
     }
 
 

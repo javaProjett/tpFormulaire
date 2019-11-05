@@ -1,34 +1,26 @@
-import javafx.application.Application;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Group;
+
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class Connexion extends Application {
+public class Connexion {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Formulaire de connexion utilisateur");
+    private Inscription inscription;
+    private Group root;
 
-        GridPane gridPane = creationVoletFormulaireConnexion(); // Créer le volet de formulaire de connexion
-
-        addUIControls(gridPane); //  Ajouter des contrôles d'interface utilisateur au volet Grille du formulaire de connexion utilisateur
-
-        Scene scene = new Scene(gridPane, 800, 500); // Créer une scène avec un volet de grille de formulaire de connexion en tant que noeud racine
-
-        primaryStage.setScene(scene); // Met en place la scene
-
-        primaryStage.show(); // On affiche
+    public Connexion(Inscription inscription, Group root) {
+        this.inscription = inscription;
+        this.root = root;
     }
-
 
     private GridPane creationVoletFormulaireConnexion() {
 
@@ -86,17 +78,28 @@ public class Connexion extends Application {
         gridPane.add(champMotDePasse, 1, 2);
 
 
-        // On ajoute un bouton connexion
-        Button buttonValider = new Button("Connexion" +
+        // On ajoute un bouton qui efface les saisie de l'utilisateur
+        Button boutonEffacer = new Button("Effacer les champs" +
                 "");
-        buttonValider.setPrefHeight(40);
-        buttonValider.setDefaultButton(true);
-        buttonValider.setPrefWidth(100);
-        gridPane.add(buttonValider, 0, 9, 2, 1);
-        GridPane.setHalignment(buttonValider, HPos.CENTER);
-        GridPane.setMargin(buttonValider, new Insets(20, 0,20,0));
+        boutonEffacer.setPrefHeight(40);
+        boutonEffacer.setDefaultButton(true);
+        boutonEffacer.setPrefWidth(150);
+        gridPane.add(boutonEffacer, 0, 7, 35, 1);
+        GridPane.setHalignment(boutonEffacer, HPos.LEFT);
+        GridPane.setMargin(boutonEffacer, new Insets(20, 0,20,0));
 
-        buttonValider.setOnAction(new EventHandler<ActionEvent>() {
+
+        // On ajoute un bouton connexion
+        Button boutonValider = new Button("Connexion" +
+                "");
+        boutonValider.setPrefHeight(40);
+        boutonValider.setDefaultButton(true);
+        boutonValider.setPrefWidth(150);
+        gridPane.add(boutonValider, 0, 7, 2, 1);
+        GridPane.setHalignment(boutonValider, HPos.RIGHT);
+        GridPane.setMargin(boutonValider, new Insets(20, 0,20,0));
+
+        boutonValider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if(champLogin.getText().isEmpty()) {
@@ -122,7 +125,4 @@ public class Connexion extends Application {
         alert.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
